@@ -1,0 +1,276 @@
+<template>
+  <div class="body">
+    <!-- 上面按列来布局 -->
+    <div class="element-top">
+      <div v-for="column in topColumn" :key="column.name" class="column">
+        <div class="column-title">{{ column.name }}</div>
+        <div
+          v-for="element in column.elementArr"
+          :key="element.seq"
+          class="base-element column-element"
+          :class="'color-' + element.color"
+          @click="handleClickElement(element)"
+        >
+          {{ element['name'] }}
+          <div class="seq">{{ element.seq }}</div>
+        </div>
+      </div>
+    </div>
+    <!-- 下面的盒子 -->
+    <div class="element-bottom">
+      <div class="line">
+        <div
+          v-for="element in LaColumn"
+          :key="element.seq"
+          class="base-element line-element color-bottom"
+          @click="handleClickElement(element)"
+        >
+          {{ element.name }}
+          <div class="seq">{{ element.seq }}</div>
+        </div>
+      </div>
+
+      <div class="line">
+        <div
+          v-for="element in AcColumn"
+          :key="element.seq"
+          class="base-element line-element color-bottom"
+          @click="handleClickElement(element)"
+        >
+          {{ element.name }}
+          <div class="seq">{{ element.seq }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+const emits = defineEmits(['clickElement']);
+
+// 基本元素
+const topColumn = [
+  {
+    name: 'ⅠA',
+    elementArr: [
+      { name: 'H', seq: 1, color: 7 },
+      { name: 'Li', seq: 3, color: 1 },
+      { name: 'Na', seq: 11, color: 1 },
+      { name: 'K', seq: 19, color: 1 },
+      { name: 'Rb', seq: 37, color: 1 },
+      { name: 'CS', seq: 55, color: 1 },
+      { name: 'Fr', seq: 87, color: 1 },
+    ],
+  },
+  {
+    name: 'ⅡA',
+    elementArr: [
+      { name: 'Be', seq: 4, color: 2 },
+      { name: 'Mg', seq: 12, color: 2 },
+      { name: 'Ca', seq: 20, color: 2 },
+      { name: 'Sr', seq: 38, color: 2 },
+      { name: 'Ba', seq: 56, color: 2 },
+      { name: 'Ra', seq: 88, color: 2 },
+    ],
+  },
+  {
+    name: 'ⅢB',
+    elementArr: [
+      { name: 'Sc', seq: 21, color: 3 },
+      { name: 'Y', seq: 39, color: 3 },
+      { name: 'La-Lu', seq: '57-71', color: 'bottom' },
+      { name: 'Ac-Lr', seq: '89-103', color: 'bottom' },
+    ],
+  },
+  {
+    name: 'ⅣB',
+    elementArr: [
+      { name: 'Ti', seq: 22, color: 3 },
+      { name: 'Zr', seq: 40, color: 3 },
+      { name: 'Hf', seq: 72, color: 3 },
+      { name: 'Rf', seq: 104, color: 3 },
+    ],
+  },
+  {
+    name: 'ⅤB',
+    elementArr: [
+      { name: 'V', seq: 23, color: 3 },
+      { name: 'Nb', seq: 41, color: 3 },
+      { name: 'Ta', seq: 73, color: 3 },
+      { name: 'Db', seq: 105, color: 3 },
+    ],
+  },
+  {
+    name: 'ⅥB',
+    elementArr: [
+      { name: 'Cr', seq: 24, color: 3 },
+      { name: 'Mo', seq: 42, color: 3 },
+      { name: 'W', seq: 74, color: 3 },
+      { name: 'Sg', seq: 106, color: 3 },
+    ],
+  },
+  {
+    name: 'ⅦB',
+    elementArr: [
+      { name: 'Mn', seq: 25, color: 3 },
+      { name: 'Tc', seq: 43, color: 3 },
+      { name: 'Re', seq: 75, color: 3 },
+      { name: 'Bh', seq: 107, color: 3 },
+    ],
+  },
+  {
+    name: 'Ⅷ',
+    elementArr: [
+      { name: 'Fe', seq: 26, color: 3 },
+      { name: 'Ru', seq: 44, color: 3 },
+      { name: 'Os', seq: 76, color: 3 },
+      { name: 'Hs', seq: 108, color: 3 },
+    ],
+  },
+  {
+    name: 'Ⅷ',
+    elementArr: [
+      { name: 'Co', seq: 27, color: 3 },
+      { name: 'Rh', seq: 45, color: 3 },
+      { name: 'Ir', seq: 77, color: 3 },
+      { name: 'Mt', seq: 109, color: 3 },
+    ],
+  },
+  {
+    name: 'Ⅷ',
+    elementArr: [
+      { name: 'Ni', seq: 28, color: 3 },
+      { name: 'Pd', seq: 46, color: 3 },
+      { name: 'Pt', seq: 78, color: 3 },
+      { name: 'Ds', seq: 110, color: 3 },
+    ],
+  },
+  {
+    name: 'ⅠB',
+    elementArr: [
+      { name: 'Cu', seq: 29, color: 3 },
+      { name: 'Ag', seq: 47, color: 3 },
+      { name: 'Au', seq: 79, color: 3 },
+      { name: 'Rg', seq: 111, color: 3 },
+    ],
+  },
+  {
+    name: 'ⅡB',
+    elementArr: [
+      { name: 'Zn', seq: 30, color: 3 },
+      { name: 'Cd', seq: 48, color: 3 },
+      { name: 'Hg', seq: 80, color: 3 },
+      { name: 'Cn', seq: 112, color: 3 },
+    ],
+  },
+  {
+    name: 'ⅢA',
+    elementArr: [
+      { name: 'B', seq: 5, color: 4 },
+      { name: 'Al', seq: 13, color: 3 },
+      { name: 'Ga', seq: 31, color: 3 },
+      { name: 'In', seq: 49, color: 3 },
+      { name: 'Tl', seq: 81, color: 3 },
+      { name: 'Uut', seq: 113, color: 5 },
+    ],
+  },
+  {
+    name: 'ⅣA',
+    elementArr: [
+      { name: 'C', seq: 6, color: 7 },
+      { name: 'Si', seq: 14, color: 4 },
+      { name: 'Ge', seq: 32, color: 4 },
+      { name: 'Sn', seq: 50, color: 3 },
+      { name: 'Pb', seq: 82, color: 3 },
+      { name: 'Uuq', seq: 114, color: 5 },
+    ],
+  },
+  {
+    name: 'ⅤA',
+    elementArr: [
+      { name: 'N', seq: 7, color: 7 },
+      { name: 'P', seq: 15, color: 7 },
+      { name: 'As', seq: 33, color: 4 },
+      { name: 'Sb', seq: 51, color: 4 },
+      { name: 'Bi', seq: 83, color: 3 },
+      { name: 'Uup', seq: 115, color: 5 },
+    ],
+  },
+  {
+    name: 'ⅥA',
+    elementArr: [
+      { name: 'O', seq: 8, color: 7 },
+      { name: 'S', seq: 16, color: 7 },
+      { name: 'Se', seq: 11, color: 7 },
+      { name: 'Te', seq: 19, color: 4 },
+      { name: 'Po', seq: 84, color: 4 },
+      { name: 'Uuh', seq: 116, color: 5 },
+    ],
+  },
+  {
+    name: 'ⅦA',
+    elementArr: [
+      { name: 'F', seq: 9, color: 6 },
+      { name: 'Cl', seq: 17, color: 6 },
+      { name: 'Br', seq: 35, color: 6 },
+      { name: 'I', seq: 53, color: 6 },
+      { name: 'At', seq: 85, color: 6 },
+      { name: 'Uus', seq: 117, color: 5 },
+    ],
+  },
+  {
+    name: '',
+    elementArr: [
+      { name: 'He', seq: 2, color: 0 },
+      { name: 'Ne', seq: 10, color: 0 },
+      { name: 'Ar', seq: 18, color: 0 },
+      { name: 'Kr', seq: 36, color: 0 },
+      { name: 'Xe', seq: 54, color: 0 },
+      { name: 'Rn', seq: 86, color: 0 },
+      { name: 'Uuo', seq: 118, color: 5 },
+    ],
+  },
+];
+
+// 镧系
+const LaColumn = [
+  { name: 'La', seq: 57, color: 4 },
+  { name: 'Ce', seq: 58, color: 2 },
+  { name: 'Pr', seq: 59, color: 2 },
+  { name: 'Nd', seq: 60, color: 2 },
+  { name: 'Pm', seq: 61, color: 2 },
+  { name: 'Sm', seq: 62, color: 2 },
+  { name: 'Eu', seq: 63, color: 2 },
+  { name: 'Gd', seq: 64, color: 2 },
+  { name: 'Tb', seq: 65, color: 2 },
+  { name: 'Dy', seq: 66, color: 2 },
+  { name: 'Ho', seq: 67, color: 2 },
+  { name: 'Er', seq: 68, color: 2 },
+  { name: 'Tm', seq: 69, color: 2 },
+  { name: 'Yb', seq: 70, color: 2 },
+  { name: 'Lu', seq: 71, color: 2 },
+];
+const AcColumn = [
+  { name: 'Ac', seq: 89, color: 4 },
+  { name: 'Th', seq: 90, color: 2 },
+  { name: 'Pa', seq: 91, color: 2 },
+  { name: 'U', seq: 92, color: 2 },
+  { name: 'Np', seq: 93, color: 2 },
+  { name: 'Pu', seq: 94, color: 2 },
+  { name: 'Am', seq: 95, color: 2 },
+  { name: 'Cm', seq: 96, color: 2 },
+  { name: 'Bk', seq: 97, color: 2 },
+  { name: 'Cf', seq: 98, color: 2 },
+  { name: 'Es', seq: 99, color: 2 },
+  { name: 'Fm', seq: 100, color: 2 },
+  { name: 'Md', seq: 101, color: 2 },
+  { name: 'No', seq: 102, color: 2 },
+  { name: 'Lr', seq: 103, color: 2 },
+];
+
+function handleClickElement(element: any) {
+  emits('clickElement', element);
+}
+</script>
+<style lang="less" scoped>
+@import './style.css';
+</style>
